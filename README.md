@@ -22,4 +22,3 @@ return result.ReturnNoData(http.StatusBadRequest, i18n.I18NLoad("Failure", "retu
 return result.ReturnNoData(http.StatusBadRequest, httpRequest.Message)
 }
 ```
-
