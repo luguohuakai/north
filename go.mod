@@ -1,4 +1,4 @@
-module north
+module github.com/luguohuakai/north
 
 go 1.16
 
