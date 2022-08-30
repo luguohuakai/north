@@ -1,4 +1,4 @@
-module srun
+module north
 
 go 1.16
 
