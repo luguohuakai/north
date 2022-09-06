@@ -259,7 +259,47 @@ type SsoResult struct {
 	IsSuccess bool   `json:"is_success"`
 }
 
-func GetSsoSuccessOrError(code string) (res SsoResult) {
+func GetSsoSuccessOrError(sso HttpResultSso) (res SsoResult) {
+	var code string
+
+	if sso.Ecode != "" {
+		code = sso.Ecode
+		goto next
+	}
+	if sso.PloyMsg != "" {
+		arr := strings.Split(sso.PloyMsg, ":")
+		if len(arr) != 2 {
+			code = sso.PloyMsg
+			goto next
+		} else {
+			code = arr[0]
+			goto next
+		}
+	}
+	if sso.SucMsg != "" {
+		code = sso.SucMsg
+		goto next
+	}
+	if sso.ErrorMsg != "" {
+		arr := strings.Split(sso.ErrorMsg, ":")
+		if len(arr) != 2 {
+			code = sso.ErrorMsg
+			goto next
+		} else {
+			code = arr[0]
+			goto next
+		}
+	}
+	if sso.Res != "" {
+		code = sso.Res
+		goto next
+	}
+	if sso.Error != "" {
+		code = sso.Error
+		goto next
+	}
+
+next:
 	res.Code = code
 	if ssoSuccess[code] != "" {
 		res.Message = ssoSuccess[code]
