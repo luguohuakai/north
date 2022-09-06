@@ -30,6 +30,15 @@ type HttpResult struct {
 	Meta    Meta        `json:"_meta"`
 }
 
+type HttpResultSso struct {
+	Ecode    string `json:"ecode,omitempty"`
+	PloyMsg  string `json:"ploy_msg,omitempty"`
+	SucMsg   string `json:"suc_msg,omitempty"`
+	ErrorMsg string `json:"error_msg,omitempty"`
+	Res      string `json:"res,omitempty"`
+	Error    string `json:"error,omitempty"`
+}
+
 type Meta struct {
 	TotalCount int `json:"totalCount"`
 }
@@ -413,6 +422,28 @@ func Request(api string, MethodParamsNoAccessToken ...interface{}) (httpResult *
 	}
 	if httpResult.Data == nil {
 		httpResult.Data = make([]string, 0)
+	}
+
+	return
+}
+
+func RequestSso(reqUrl string, params map[string]string) (httpResult *HttpResultSso, err error) {
+	var rs []byte
+
+	rs, err = Post(reqUrl, params)
+
+	// 无论请求成功或失败都记录请求日志
+	logInfo("post", reqUrl, fmt.Sprintf("%s", rs), mapToJson(params))
+	if err != nil {
+		errMsg := fmt.Sprintf("api request error: %s", err.Error())
+		logError("post", reqUrl, errMsg, mapToJson(params))
+		return nil, errors.New(errMsg)
+	}
+	// 解码json串到httpResult结构体
+	if e := json.Unmarshal(rs, &httpResult); e != nil {
+		errMsg := fmt.Sprintf("json unmarshal error: %s", e.Error())
+		logError("post", reqUrl, errMsg, mapToJson(params))
+		return nil, errors.New(errMsg)
 	}
 
 	return
