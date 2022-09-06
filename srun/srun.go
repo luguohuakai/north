@@ -270,6 +270,7 @@ func GetSsoSuccessOrError(code string) (res SsoResult) {
 	} else {
 		res.Message = "unknown code"
 	}
+
 	return
 }
 
