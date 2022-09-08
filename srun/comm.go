@@ -59,7 +59,7 @@ func Sso(ssoSecret, ssoUrl, username, ip, acId, action string) (*HttpResultSso, 
 		delete(data, "pop")
 	}
 
-	return RequestSso(ssoUrl+"/api/v1/user/validate-users", data)
+	return RequestSso(ssoUrl+"/cgi-bin/srun_portal", data)
 }
 
 func MD5(v string) string {
