@@ -246,9 +246,9 @@ var ssoSuccess = map[string]string{
 }
 
 type HttpResultSso struct {
-	ServerFlag             int    `json:"server_flag,omitempty"`
-	ServicesIntfServerIP   string `json:"services_intf_server_ip,omitempty"`
-	ServicesIntfServerPort string `json:"services_intf_server_port,omitempty"`
+	ServerFlag             int    `json:"ServerFlag"`
+	ServicesIntfServerIP   string `json:"ServicesIntfServerIP"`
+	ServicesIntfServerPort string `json:"ServicesIntfServerPort"`
 	CheckoutDate           int    `json:"checkout_date,omitempty"`
 	ClientIp               string `json:"client_ip,omitempty"`
 	Ecode                  int    `json:"ecode,omitempty"`
