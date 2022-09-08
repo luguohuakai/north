@@ -563,7 +563,7 @@ func RequestSso(reqUrl string, params map[string]string) (httpResult *HttpResult
 	// 无论请求成功或失败都记录请求日志
 	logInfo("post", reqUrl, fmt.Sprintf("%s", rs), mapToJson(params))
 	if err != nil {
-		errMsg := fmt.Sprintf("api request error: %s", err.Error())
+		errMsg := fmt.Sprintf("sso api request error: %s, rs: %s", err.Error(), rs)
 		logError("post", reqUrl, errMsg, mapToJson(params))
 		return nil, errors.New(errMsg)
 	}
