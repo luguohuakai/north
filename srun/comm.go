@@ -37,6 +37,7 @@ func UserExists(username string) (err error) {
 }
 
 // Sso 调用单点登录接口
+// 8082上的微信临时放行key(必须核实)也可在服务器文件srun4kauth.xml中ApiAuthSecret字段获得需修改EnableAPIAuth=1然后重启srun3kauth
 // @params action login:登录 logout:登出
 func Sso(ssoSecret, ssoUrl, username, ip, acId, action string) (*HttpResultSso, error) {
 	timeStamp := strconv.FormatInt(time.Now().Unix(), 10)

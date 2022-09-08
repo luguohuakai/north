@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	log "github.com/sirupsen/logrus"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
@@ -555,6 +556,7 @@ func Request(api string, MethodParamsNoAccessToken ...interface{}) (httpResult *
 	return
 }
 
+// RequestSso 8082上的微信临时放行key(必须核实)也可在服务器文件srun4kauth.xml中ApiAuthSecret字段获得需修改EnableAPIAuth=1然后重启srun3kauth
 func RequestSso(reqUrl string, params map[string]string) (httpResult *HttpResultSso, err error) {
 	var rs []byte
 
@@ -669,6 +671,59 @@ func Post(requestUrl string, params map[string]string) (body []byte, err error) 
 	} else {
 		return nil, errors.New("api request has error: err = nil")
 	}
+}
+func PostSso(requestUrl string, params map[string]string) (body []byte, err error) {
+	uv := make(url.Values)
+	for k, v := range params {
+		uv.Add(k, v)
+	}
+	encode := uv.Encode()
+	var response *http.Response
+	// 重连2次
+	for i := 0; i < 2; i++ {
+
+		response, err = PostSso_(requestUrl, strings.NewReader(encode))
+		if err != nil {
+			times := i + 1
+			logError("get", requestUrl, fmt.Sprintf("connect times: (%d) net connect has error: %s", times, err.Error()), mapToJson(params))
+		} else {
+			break
+		}
+	}
+	if response != nil {
+		defer response.Body.Close()
+		body, err := ioutil.ReadAll(response.Body)
+		if err != nil {
+			return nil, errors.New("api request has error: " + err.Error())
+		}
+		return body, nil
+	}
+	if err != nil {
+		return nil, errors.New("api request has error: " + err.Error())
+	} else {
+		return nil, errors.New("api request has error: err = nil")
+	}
+}
+
+func PostSso_(url string, body io.Reader) (resp *http.Response, err error) {
+	// 跳过证书验证
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	// http cookie接口
+	cookieJar, _ := cookiejar.New(nil)
+	c := &http.Client{
+		Jar:       cookieJar,
+		Transport: tr,
+	}
+
+	req, err := http.NewRequest("POST", url, body)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Accept", "application/json")
+	return c.Do(req)
 }
 
 // DeleteOrUpdate @title DeleteOrUpdate
