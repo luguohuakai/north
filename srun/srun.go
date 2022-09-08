@@ -560,7 +560,7 @@ func Request(api string, MethodParamsNoAccessToken ...interface{}) (httpResult *
 func RequestSso(reqUrl string, params map[string]string) (httpResult *HttpResultSso, err error) {
 	var rs []byte
 
-	rs, err = Post(reqUrl, params)
+	rs, err = PostSso(reqUrl, params)
 
 	// 无论请求成功或失败都记录请求日志
 	logInfo("post", reqUrl, fmt.Sprintf("%s", rs), mapToJson(params))
