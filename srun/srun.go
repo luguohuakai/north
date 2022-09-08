@@ -31,15 +31,6 @@ type HttpResult struct {
 	Meta    Meta        `json:"_meta"`
 }
 
-type HttpResultSso struct {
-	Ecode    string `json:"ecode,omitempty"`
-	PloyMsg  string `json:"ploy_msg,omitempty"`
-	SucMsg   string `json:"suc_msg,omitempty"`
-	ErrorMsg string `json:"error_msg,omitempty"`
-	Res      string `json:"res,omitempty"`
-	Error    string `json:"error,omitempty"`
-}
-
 type Meta struct {
 	TotalCount int `json:"totalCount"`
 }
@@ -254,6 +245,28 @@ var ssoSuccess = map[string]string{
 	"不在线上":                               "在线账号注销成功.",
 }
 
+type HttpResultSso struct {
+	ServerFlag             int    `json:"server_flag,omitempty"`
+	ServicesIntfServerIP   string `json:"services_intf_server_ip,omitempty"`
+	ServicesIntfServerPort string `json:"services_intf_server_port,omitempty"`
+	CheckoutDate           int    `json:"checkout_date,omitempty"`
+	ClientIp               string `json:"client_ip,omitempty"`
+	Ecode                  int    `json:"ecode,omitempty"`
+	Error                  string `json:"error,omitempty"`
+	ErrorMsg               string `json:"error_msg,omitempty"`
+	OnlineIp               string `json:"online_ip,omitempty"`
+	RealName               string `json:"real_name,omitempty"`
+	RemainFlux             int    `json:"remain_flux,omitempty"`
+	RemainTimes            int    `json:"remain_times,omitempty"`
+	Res                    string `json:"res,omitempty"`
+	SrunVer                string `json:"srun_ver,omitempty"`
+	SucMsg                 string `json:"suc_msg,omitempty"`
+	Sysver                 string `json:"sysver,omitempty"`
+	Username               string `json:"username,omitempty"`
+	WalletBalance          int    `json:"wallet_balance,omitempty"`
+	PloyMsg                string `json:"ploy_msg,omitempty"`
+}
+
 type SsoResult struct {
 	Code      string `json:"code"`
 	Message   string `json:"message"`
@@ -263,10 +276,10 @@ type SsoResult struct {
 func GetSsoSuccessOrError(sso HttpResultSso) (res SsoResult) {
 	var code string
 
-	if sso.Ecode != "" {
-		code = sso.Ecode
-		goto next
-	}
+	//if sso.Ecode != 0 {
+	//	code = strconv.Itoa(sso.Ecode)
+	//	goto next
+	//}
 	if sso.PloyMsg != "" {
 		arr := strings.Split(sso.PloyMsg, ":")
 		if len(arr) != 2 {
