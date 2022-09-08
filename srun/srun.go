@@ -569,7 +569,7 @@ func RequestSso(reqUrl string, params map[string]string) (httpResult *HttpResult
 	}
 	// 解码json串到httpResult结构体
 	if e := json.Unmarshal(rs, &httpResult); e != nil {
-		errMsg := fmt.Sprintf("json unmarshal error: %s", e.Error())
+		errMsg := fmt.Sprintf("sso json unmarshal error: %s, rs: %s", e.Error(), rs)
 		logError("post", reqUrl, errMsg, mapToJson(params))
 		return nil, errors.New(errMsg)
 	}
