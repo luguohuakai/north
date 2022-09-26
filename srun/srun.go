@@ -179,6 +179,7 @@ const (
 )
 
 var ssoError = map[string]string{
+	"client_ip_error":                     "客户端IP错误",
 	"Nas type not found.":                 "认证设备(Nas)未找到",
 	"user_tab_error":                      "认证程序未启动",
 	"username_error":                      "用户名输入错误",
@@ -322,7 +323,7 @@ next:
 		res.Message = ssoError[code]
 		res.IsSuccess = false
 	} else {
-		res.Message = "unknown code"
+		res.Message = "unknown code: " + code
 	}
 
 	return
