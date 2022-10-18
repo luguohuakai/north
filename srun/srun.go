@@ -253,7 +253,7 @@ type HttpResultSso struct {
 	ServicesIntfServerPort string `json:"ServicesIntfServerPort"`
 	CheckoutDate           int    `json:"checkout_date,omitempty"`
 	ClientIp               string `json:"client_ip,omitempty"`
-	Ecode                  int    `json:"ecode,omitempty"`
+	Ecode                  string `json:"ecode,omitempty"`
 	Error                  string `json:"error,omitempty"`
 	ErrorMsg               string `json:"error_msg,omitempty"`
 	OnlineIp               string `json:"online_ip,omitempty"`
