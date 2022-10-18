@@ -249,25 +249,25 @@ var ssoSuccess = map[string]string{
 }
 
 type HttpResultSso struct {
-	ServerFlag             int    `json:"ServerFlag"`
-	ServicesIntfServerIP   string `json:"ServicesIntfServerIP"`
-	ServicesIntfServerPort string `json:"ServicesIntfServerPort"`
-	CheckoutDate           int    `json:"checkout_date,omitempty"`
-	ClientIp               string `json:"client_ip,omitempty"`
-	Ecode                  string `json:"ecode,omitempty"`
-	Error                  string `json:"error,omitempty"`
-	ErrorMsg               string `json:"error_msg,omitempty"`
-	OnlineIp               string `json:"online_ip,omitempty"`
-	RealName               string `json:"real_name,omitempty"`
-	RemainFlux             int    `json:"remain_flux,omitempty"`
-	RemainTimes            int    `json:"remain_times,omitempty"`
-	Res                    string `json:"res,omitempty"`
-	SrunVer                string `json:"srun_ver,omitempty"`
-	SucMsg                 string `json:"suc_msg,omitempty"`
-	Sysver                 string `json:"sysver,omitempty"`
-	Username               string `json:"username,omitempty"`
-	WalletBalance          int    `json:"wallet_balance,omitempty"`
-	PloyMsg                string `json:"ploy_msg,omitempty"`
+	ServerFlag             int         `json:"ServerFlag"`
+	ServicesIntfServerIP   string      `json:"ServicesIntfServerIP"`
+	ServicesIntfServerPort string      `json:"ServicesIntfServerPort"`
+	CheckoutDate           int         `json:"checkout_date,omitempty"`
+	ClientIp               string      `json:"client_ip,omitempty"`
+	Ecode                  interface{} `json:"ecode,omitempty"`
+	Error                  string      `json:"error,omitempty"`
+	ErrorMsg               string      `json:"error_msg,omitempty"`
+	OnlineIp               string      `json:"online_ip,omitempty"`
+	RealName               string      `json:"real_name,omitempty"`
+	RemainFlux             int         `json:"remain_flux,omitempty"`
+	RemainTimes            int         `json:"remain_times,omitempty"`
+	Res                    string      `json:"res,omitempty"`
+	SrunVer                string      `json:"srun_ver,omitempty"`
+	SucMsg                 string      `json:"suc_msg,omitempty"`
+	Sysver                 string      `json:"sysver,omitempty"`
+	Username               string      `json:"username,omitempty"`
+	WalletBalance          int         `json:"wallet_balance,omitempty"`
+	PloyMsg                string      `json:"ploy_msg,omitempty"`
 }
 
 type SsoResult struct {
