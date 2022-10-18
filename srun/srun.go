@@ -209,6 +209,7 @@ var ssoError = map[string]string{
 	"E2532":                               "您的两次认证的间隔太短,请稍候10秒后再重试登录",
 	"E2533":                               "密码错误次数超过限制，请5分钟后再重试登录",
 	"E2531":                               "帐号不存在或密码错误",
+	"E2536":                               "License 已过期, 请重新授权",
 	"E2553":                               "帐号或密码错误",
 	"E2606":                               "用户被禁用",
 	"E2613":                               "NAS PORT绑定错误",
@@ -324,6 +325,7 @@ next:
 		res.Message = ssoError[code]
 		res.IsSuccess = false
 	} else {
+		res.IsSuccess = false
 		res.Message = "unknown code: " + code
 	}
 
