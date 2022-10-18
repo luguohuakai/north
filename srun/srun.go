@@ -336,7 +336,7 @@ next:
 // @param api
 // @return string
 func Url(api string) string {
-	confPath := "/etc/northbound.conf"
+	confPath := "/etc/northbound.ini"
 	var conf Northbound
 	if dataMap, err := ReadFile(confPath); err != nil {
 		conf.Protocol = "https"

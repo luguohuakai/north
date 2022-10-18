@@ -3,7 +3,7 @@
 深澜北向接口SDK 接口文档请参考北向接口文档
 > 引入方式: `go get github.com/luguohuakai/SrunNorthbound`
 
-* 首次使用请配置配置文件 `/etc/northbound.conf` 没有的话需要先创建, 样例如下
+* 首次使用请配置配置文件 `/etc/northbound.ini` 没有的话需要先创建, 样例如下
 
 ```ini
 protocol = "https"
