@@ -14,6 +14,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -354,7 +355,9 @@ func Url(api string) string {
 			conf.InterfaceIp = "127.0.0.1"
 		}
 		if val, ok := dataMap["port"]; ok {
-			conf.Port = val.(int)
+			i, _ := strconv.Atoi(val.(string))
+			conf.Port = i
+			//conf.Port = val.(int)
 		} else {
 			conf.Port = 8001
 		}
